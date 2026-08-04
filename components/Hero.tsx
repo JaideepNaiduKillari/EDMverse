@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { scrollToSection } from "@/lib/scrollTo";
+import EDMVisual from "./EDMVisual";
 
 const INDEX_ITEMS = [
   { n: "01", label: "Artists" },
@@ -20,7 +21,9 @@ export default function Hero() {
       className="snap-section relative flex flex-col justify-center px-6 md:px-10"
       style={{ paddingTop: "var(--topbar-h)" }}
     >
-      <div className="grid lg:grid-cols-[1fr_400px] gap-10 lg:gap-16 py-12 lg:py-0">
+      <div className="parallax-grid" />
+      <EDMVisual className="right-[-8%] top-[15%] lg:right-[7%] lg:top-[18%]" />
+      <div className="relative z-10 grid lg:grid-cols-[1fr_400px] gap-10 lg:gap-16 py-12 lg:py-0">
         {/* Left column */}
         <div className="flex flex-col justify-center">
           <p className="mono-label text-[12px] text-smoke-300 mb-8">
@@ -28,7 +31,7 @@ export default function Hero() {
             music, one platform
           </p>
 
-          <h1 className="font-display font-black uppercase leading-[0.92] tracking-tight text-[15vw] sm:text-[11vw] md:text-[7.2vw] lg:text-[6.2vw]">
+          <h1 className="font-display font-black uppercase leading-[0.92] tracking-tight text-[15vw] sm:text-[11vw] md:text-[7.2vw] lg:text-[6.2vw] [text-shadow:0_0_42px_rgba(249,115,22,0.08)]">
             The Home
             <br />
             Of Electronic
@@ -64,7 +67,7 @@ export default function Hero() {
         </div>
 
         {/* Right column */}
-        <div className="lg:border-l lg:border-line lg:pl-10 flex flex-col justify-center">
+        <div className="lg:border-l lg:border-line lg:pl-10 flex flex-col justify-center backdrop-blur-[1px]">
           <p className="text-smoke-200 text-lg leading-relaxed max-w-sm">
             EDMVerse links artists, festivals, events, releases and news into
             a single, navigable record of the scene.

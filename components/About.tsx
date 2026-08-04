@@ -1,4 +1,5 @@
 import GridTicks from "./GridTicks";
+import EDMVisual from "./EDMVisual";
 
 const MODULES = [
   {
@@ -41,8 +42,9 @@ export default function About() {
       style={{ paddingTop: "var(--topbar-h)" }}
     >
       <GridTicks />
+      <EDMVisual className="right-[-20%] bottom-[-25%] opacity-40" />
 
-      <div className="py-14 md:py-0">
+      <div className="relative z-10 py-14 md:py-0">
         <div className="flex items-end justify-between border-b border-line pb-6 mb-2">
           <h2 className="font-display font-extrabold text-4xl md:text-5xl">
             What it does
@@ -57,7 +59,7 @@ export default function About() {
             <div
               key={m.n}
               className={[
-                "border-line px-0 md:px-8 py-8 md:py-10",
+                "module-card border-line px-0 md:px-8 py-8 md:py-10",
                 i % 3 !== 0 ? "md:border-l" : "",
                 i % 3 !== 2 ? "border-b md:border-b-0" : "border-b",
                 i < 3 ? "md:border-b" : "",

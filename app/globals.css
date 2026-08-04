@@ -26,6 +26,10 @@ body {
 
 body {
   font-feature-settings: "ss01" on, "cv01" on;
+  background-image:
+    radial-gradient(circle at 85% 14%, rgba(249, 115, 22, 0.11), transparent 23rem),
+    radial-gradient(circle at 12% 82%, rgba(249, 115, 22, 0.06), transparent 27rem);
+  background-attachment: fixed;
 }
 
 .scroll-shell {
@@ -39,6 +43,20 @@ body {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   min-height: 100svh;
+  overflow: hidden;
+}
+
+.snap-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
 }
 
 .mono-label {
@@ -65,6 +83,182 @@ body {
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Decorative, fixed-depth layers make the page feel deeper as content moves. */
+.parallax-grid {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background: repeating-radial-gradient(
+    ellipse at 74% 48%,
+    rgba(249, 115, 22, 0.15) 0,
+    rgba(249, 115, 22, 0.15) 1px,
+    transparent 1px,
+    transparent 48px
+  );
+  opacity: 0.48;
+  transform: translate3d(0, -8%, 0) rotate(-7deg);
+  animation: parallax-drift 18s ease-in-out infinite alternate;
+}
+
+.edm-visual {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  width: min(43vw, 590px);
+  aspect-ratio: 1;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 44px rgba(249, 115, 22, 0.13));
+}
+
+.edm-orbit {
+  position: absolute;
+  inset: 4%;
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  border-radius: 50%;
+  animation: orbit-spin 28s linear infinite;
+}
+
+.edm-orbit::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f97316;
+  box-shadow: 0 0 16px #f97316;
+}
+
+.edm-orbit-two {
+  inset: 16%;
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.16);
+  animation-direction: reverse;
+  animation-duration: 22s;
+}
+
+.edm-deck {
+  position: absolute;
+  inset: 17%;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.04), rgba(10, 10, 10, 0.34) 67%);
+  box-shadow: inset 0 0 0 14px rgba(255, 255, 255, 0.025);
+}
+
+.edm-platter {
+  position: relative;
+  width: 70%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, #171717 0 2px, #0d0d0d 3px 5px);
+  animation: platter-spin 9s linear infinite;
+}
+
+.edm-platter-groove {
+  position: absolute;
+  inset: 17%;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: inherit;
+}
+
+.edm-platter-label {
+  position: absolute;
+  inset: 36%;
+  border: 1px solid rgba(249, 115, 22, 0.9);
+  border-radius: inherit;
+  background: #f97316;
+  box-shadow: 0 0 22px rgba(249, 115, 22, 0.34);
+}
+
+.edm-tonearm {
+  position: absolute;
+  width: 36%;
+  height: 2px;
+  top: 19%;
+  right: -7%;
+  transform: rotate(42deg);
+  transform-origin: right center;
+  background: #d4d4d4;
+  box-shadow: 0 0 0 3px #0a0a0a;
+}
+
+.edm-deck-controls {
+  position: absolute;
+  right: 9%;
+  bottom: 20%;
+  display: flex;
+  gap: 7px;
+}
+
+.edm-deck-controls span {
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(249, 115, 22, 0.75);
+  border-radius: 50%;
+}
+
+.edm-waveform {
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  bottom: -2%;
+  height: 18%;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.8;
+}
+
+.edm-waveform span {
+  flex: 1;
+  min-height: 8%;
+  background: linear-gradient(to top, rgba(249, 115, 22, 0.25), #f97316);
+  transform-origin: center;
+  animation: waveform-pulse 1.4s ease-in-out infinite alternate;
+}
+
+.edm-waveform span:nth-child(3n) { animation-delay: -0.7s; }
+.edm-waveform span:nth-child(4n) { animation-delay: -1.1s; }
+
+.module-card {
+  position: relative;
+  transition: transform 300ms ease, background-color 300ms ease, border-color 300ms ease;
+}
+
+.module-card:hover {
+  transform: translateY(-7px);
+  background: rgba(249, 115, 22, 0.055);
+  border-color: rgba(249, 115, 22, 0.38);
+}
+
+.module-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  transition: border-color 300ms ease;
+}
+
+.module-card:hover::after { border-color: #f97316; }
+
+@keyframes parallax-drift {
+  from { transform: translate3d(0, -8%, 0) rotate(-7deg) scale(1); }
+  to { transform: translate3d(-2%, 5%, 0) rotate(-7deg) scale(1.08); }
+}
+
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes platter-spin { to { transform: rotate(360deg); } }
+@keyframes waveform-pulse { to { transform: scaleY(0.56); opacity: 0.42; } }
+
 /* Focus visibility for keyboard users */
 a:focus-visible,
 button:focus-visible,
@@ -81,4 +275,9 @@ select:focus-visible {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+@media (max-width: 767px) {
+  .edm-visual { width: 92vw; opacity: 0.42; }
+  .edm-waveform { bottom: 8%; }
 }

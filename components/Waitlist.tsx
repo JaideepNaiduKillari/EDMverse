@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import GridTicks from "./GridTicks";
+import EDMVisual from "./EDMVisual";
 import { COUNTRIES } from "@/lib/countries";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -51,8 +52,10 @@ export default function Waitlist() {
       style={{ paddingTop: "var(--topbar-h)" }}
     >
       <GridTicks />
+      <div className="parallax-grid opacity-30" />
+      <EDMVisual className="left-[-22%] bottom-[-30%] opacity-35" />
 
-      <div className="grid lg:grid-cols-[1fr_460px] gap-10 lg:gap-16 py-14 lg:py-0">
+      <div className="relative z-10 grid lg:grid-cols-[1fr_460px] gap-10 lg:gap-16 py-14 lg:py-0">
         {/* Left — framing copy */}
         <div className="flex flex-col justify-center">
           <p className="mono-label text-[12px] text-smoke-300 mb-6">
@@ -70,7 +73,7 @@ export default function Waitlist() {
         </div>
 
         {/* Right — form */}
-        <div className="lg:border-l lg:border-line lg:pl-10 flex flex-col justify-center">
+        <div className="lg:border-l lg:border-line lg:pl-10 flex flex-col justify-center backdrop-blur-[2px]">
           {status === "success" ? (
             <div className="border border-line px-8 py-10">
               <p className="mono-label text-[12px] text-accent mb-4">

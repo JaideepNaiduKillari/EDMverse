@@ -4,6 +4,7 @@ import { scrollToSection } from "@/lib/scrollTo";
 import Logo from "./Logo";
 
 const NAV_LINKS: { label: string; id: string }[] = [
+  { label: "Home", id: "hero" },
   { label: "About", id: "about" },
   { label: "FAQ", id: "faq" },
 ];
