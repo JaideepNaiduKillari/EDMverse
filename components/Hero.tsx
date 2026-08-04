@@ -45,7 +45,7 @@ export default function Hero() {
               onClick={() => scrollToSection("waitlist")}
               className="mono-label text-[12px] bg-accent hover:bg-white text-ink-950 font-semibold px-7 py-4 transition-colors"
             >
-              Request Access
+              get early Access
             </button>
             <button
               onClick={() => setShowIndex((v) => !v)}
@@ -67,11 +67,15 @@ export default function Hero() {
         </div>
 
         {/* Right column */}
-        <div className="lg:border-l lg:border-line lg:pl-10 flex flex-col justify-center backdrop-blur-[1px]">
-          <p className="text-smoke-200 text-lg leading-relaxed max-w-sm">
-            EDMVerse links artists, festivals, events, releases and news into
-            a single, navigable record of the scene.
-          </p>
+        <div className="lg:border-l lg:border-line lg:pl-10 flex flex-col justify">
+          <div className="max-w-sm border border-line bg-ink-950/90 backdrop-blur-xl px-6 py-6 md:px-7 md:py-7 shadow-[0_18px_55px_rgba(0,0,0,0.45)]">
+            <span className="mono-label text-[10px] text-accent block mb-4">
+              [ The signal ]
+            </span>
+            <p className="text-white text-lg leading-relaxed text-justify">
+            EDMverse is a connected home for the global electronic music community - bringing together artists, fans, festivals, promoters, labels, releases, and everything in between through one seamless experience.
+            </p>
+          </div>
 
           {/* Toggle panel — animates open/closed via CSS grid-rows,
               no layout jump, no JS height measuring. */}

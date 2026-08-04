@@ -4,33 +4,33 @@ import EDMVisual from "./EDMVisual";
 const MODULES = [
   {
     n: "01",
-    title: "Artist Index",
-    desc: "Every producer, DJ, and live act in one cross-referenced catalog. Track discographies, label history, and set archives without the noise.",
+    title: "Artists",
+    desc: "Discover artists, explore their music, upcoming events, releases, labels.",
   },
   {
     n: "02",
-    title: "Release Radar",
-    desc: "New tracks, remixes, and edits the moment they land. Filter by genre, label, or the artists you actually follow.",
+    title: "Events & Festivals",
+    desc: "Find electronic music events and festivals around the world, from club nights to the biggest stages.",
   },
   {
     n: "03",
-    title: "Event Ledger",
-    desc: "Festivals, club nights, and warehouse dates mapped by city and date. Lineups update as they are announced.",
+    title: "News & Releases",
+    desc: "Stay up to date with the latest music, announcements, industry news, and everything happening in electronic music.",
   },
   {
     n: "04",
-    title: "Signal, Not Feed",
-    desc: "No infinite scroll, no engagement bait. A structured record of what matters, ordered by relevance to your taste.",
+    title: "Personalized Discovery",
+    desc: "Discover new artists, events, festivals, and music tailored to your taste.",
   },
   {
     n: "05",
-    title: "Set Archive",
-    desc: "Recorded sets, tracklists, and ID resolutions collected and searchable. Find the unreleased ID from that closing set.",
+    title: "Community",
+    desc: "Connect with fellow fans and creators who share the same passion for electronic music.",
   },
   {
     n: "06",
-    title: "Open Record",
-    desc: "Corrections, credits, and metadata contributed by the community and verified. A living archive, not a static database.",
+    title: "Everything Connected",
+    desc: "Every artist, event, festival, and release is interconnected, making it effortless to explore the electronic music ecosystem.",
   },
 ];
 
@@ -47,11 +47,8 @@ export default function About() {
       <div className="relative z-10 py-14 md:py-0">
         <div className="flex items-end justify-between border-b border-line pb-6 mb-2">
           <h2 className="font-display font-extrabold text-4xl md:text-5xl">
-            What it does
+            Everything in its right place
           </h2>
-          <span className="mono-label text-[11px] text-smoke-400">
-            [ 06 Modules ]
-          </span>
         </div>
 
         <div className="grid md:grid-cols-3 border-line">

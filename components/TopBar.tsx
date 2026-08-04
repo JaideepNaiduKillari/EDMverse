@@ -41,13 +41,13 @@ export default function TopBar() {
           onClick={() => scrollToSection("waitlist")}
           className="mono-label text-[11px] md:text-[12px] bg-accent hover:bg-white text-ink-950 font-semibold px-4 md:px-6 py-2.5 md:py-3 transition-colors"
         >
-          Request Access
+          Get Early Access
         </button>
       </div>
 
       {/* Row 2 — masthead status strip */}
       <div className="hidden sm:flex items-center justify-between border-b border-line px-6 md:px-10 h-[44px] mono-label text-[11px] text-smoke-400">
-        <span>Issue 001</span>
+        <span>003</span>
         <span className="border-l border-r border-line px-6 h-full flex items-center text-smoke-300">
           The Home of Electronic Music
         </span>
