@@ -12,6 +12,7 @@ export default function Waitlist() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [waitlistNumber, setWaitlistNumber] = useState<number | null>(null);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -32,6 +33,7 @@ export default function Waitlist() {
         return;
       }
 
+      setWaitlistNumber(data.waitlistNumber ?? null);
       setStatus("success");
       setName("");
       setCountry("");
@@ -78,7 +80,9 @@ export default function Waitlist() {
                 You&apos;re on the list.
               </h3>
               <p className="text-smoke-300 leading-relaxed">
-                We&apos;ll email you as soon as EDMVerse opens up.
+                {waitlistNumber
+                  ? `Your waitlist number is #${waitlistNumber}. Check your inbox for confirmation.`
+                  : "We&apos;ll email you as soon as EDMVerse opens up."}
               </p>
             </div>
           ) : (

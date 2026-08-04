@@ -11,6 +11,7 @@ const PRIVATE_KEY = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(
 );
 
 export type WaitlistEntry = {
+  waitlistNumber: number;
   name: string;
   country: string;
   email: string;
@@ -48,19 +49,19 @@ function getSheetsClient() {
   return cachedClient;
 }
 
-/** Reads the existing Email column (skipping the header row) for dedupe. */
-async function readWaitlistEmails(): Promise<string[]> {
+/** Reads existing signups (skipping the header row) for dedupe and numbering. */
+async function readWaitlistRows(): Promise<string[][]> {
   const sheets = getSheetsClient();
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEET_NAME}!C2:C`,
+    range: `${SHEET_NAME}!A2:E`,
   });
-  const rows = res.data.values ?? [];
-  return rows.map((r) => String(r[0] ?? "").toLowerCase());
+  return (res.data.values ?? []).map((row) => row.map(String));
 }
 
 /**
- * Appends one row to the sheet: Name | Country | Email | Created At.
+ * Appends one row to the sheet:
+ * Waitlist Number | Name | Country | Email | Created At.
  * Throws "DUPLICATE_EMAIL" if the email is already present.
  */
 export async function appendWaitlistRow(
@@ -68,22 +69,32 @@ export async function appendWaitlistRow(
 ): Promise<WaitlistEntry> {
   const sheets = getSheetsClient();
 
-  const existingEmails = await readWaitlistEmails();
-  if (existingEmails.includes(entry.email.toLowerCase())) {
+  const existingRows = await readWaitlistRows();
+  const emailExists = existingRows.some(
+    (row) => row[3]?.trim().toLowerCase() === entry.email.toLowerCase()
+  );
+  if (emailExists) {
     throw new Error("DUPLICATE_EMAIL");
   }
 
+  const highestWaitlistNumber = existingRows.reduce((highest, row) => {
+    const number = Number.parseInt(row[0] ?? "", 10);
+    return Number.isSafeInteger(number) && number > highest ? number : highest;
+  }, 0);
+  const waitlistNumber = highestWaitlistNumber + 1;
   const createdAt = new Date().toISOString();
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEET_NAME}!A:D`,
+    range: `${SHEET_NAME}!A:E`,
     valueInputOption: "USER_ENTERED",
     insertDataOption: "INSERT_ROWS",
     requestBody: {
-      values: [[entry.name, entry.country, entry.email, createdAt]],
+      values: [
+        [waitlistNumber, entry.name, entry.country, entry.email, createdAt],
+      ],
     },
   });
 
-  return { ...entry, createdAt };
+  return { ...entry, waitlistNumber, createdAt };
 }

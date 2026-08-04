@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { appendWaitlistRow } from "@/lib/googleSheets";
+import { sendWaitlistConfirmation } from "@/lib/resend";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -30,8 +31,20 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await appendWaitlistRow({ name, country, email });
-    return NextResponse.json({ ok: true }, { status: 201 });
+    const signup = await appendWaitlistRow({ name, country, email });
+
+    try {
+      await sendWaitlistConfirmation(signup);
+    } catch (emailError) {
+      // The signup succeeded, so don't encourage a retry that would produce a
+      // duplicate. The error is retained server-side for follow-up.
+      console.error("Waitlist confirmation email failed:", emailError);
+    }
+
+    return NextResponse.json(
+      { ok: true, waitlistNumber: signup.waitlistNumber },
+      { status: 201 }
+    );
   } catch (err) {
     if (err instanceof Error && err.message === "DUPLICATE_EMAIL") {
       return NextResponse.json(

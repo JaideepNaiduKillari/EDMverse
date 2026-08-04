@@ -34,7 +34,9 @@ Open http://localhost:3000.
 `POST /api/waitlist` (`app/api/waitlist/route.ts`) validates name, country,
 and email, then appends a row to a Google Sheet via `lib/googleSheets.ts`
 (deduping by email — it reads the existing Email column before appending).
-Each signup becomes one row: `Name | Country | Email | Created At`.
+Each signup becomes one row: `Waitlist Number | Name | Country | Email | Created At`.
+After it is stored, the app sends a Resend confirmation email with the saved
+waitlist number.
 
 This works from a serverless deployment (Vercel, etc.) because it writes to
 Google's servers, not your app's local disk — unlike a local file, it
@@ -55,7 +57,7 @@ it directly to see signups without a custom admin dashboard.
    `client_email` and `private_key`.
 5. **Create the Google Sheet**: a new spreadsheet with a tab (default name
    expected: `Waitlist`) with a header row:
-   `Name | Country | Email | Created At`.
+   `Waitlist Number | Name | Country | Email | Created At`.
 6. **Share the sheet** with the service account's `client_email` (found in
    the JSON key) as **Editor**.
 7. **Copy the spreadsheet ID** from its URL:
@@ -76,6 +78,19 @@ the person submitting the form just sees "Something went wrong."
 When deploying (e.g. to Vercel), add the same four variables in your
 hosting provider's environment variable settings — `.env.local` is never
 committed to git.
+
+### Resend email setup
+
+1. Create a Resend account and API key at https://resend.com/api-keys.
+2. In Resend, add and verify the domain you want to send from. Add the DNS
+   records Resend provides at your domain host.
+3. Add these environment variables locally and to your deployed app:
+   - `RESEND_API_KEY`
+   - `RESEND_FROM_EMAIL`, for example `EDMVerse <waitlist@yourdomain.com>`.
+
+The confirmation email is attempted only after the signup is saved. If email
+delivery is temporarily unavailable, the person remains on the waitlist and
+the failure is logged server-side; they are not asked to submit again.
 
 **If you'd rather use a real database later** (e.g. once this needs to
 scale, or you want SQL queries), Supabase is a natural next step since
