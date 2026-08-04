@@ -12,7 +12,6 @@ export default function Home() {
       <main className="scroll-shell">
         <Hero />
         <About />
-        <FeatureCards />
         <Waitlist />
         <FAQ />
       </main>
