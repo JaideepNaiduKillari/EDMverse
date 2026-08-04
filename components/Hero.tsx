@@ -84,12 +84,12 @@ export default function Hero() {
             }`}
           >
             <div className="overflow-hidden">
-              <div className="border-t border-line">
+              <div className="border border-line bg-ink-950/95 backdrop-blur-xl shadow-[0_18px_55px_rgba(0,0,0,0.52)]">
                 {INDEX_ITEMS.map((item) => (
                   <button
                     key={item.n}
                     onClick={() => scrollToSection("about")}
-                    className="w-full flex items-center gap-4 py-4 border-b border-line group text-left"
+                    className="w-full flex items-center gap-4 px-5 py-4 border-b border-line last:border-b-0 group text-left hover:bg-accent-soft transition-colors"
                   >
                     <span className="mono-label text-[12px] text-accent">
                       {item.n}
