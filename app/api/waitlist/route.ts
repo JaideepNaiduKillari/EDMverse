@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { appendWaitlistRow } from "@/lib/googleSheets";
-import { sendWaitlistConfirmation } from "@/lib/resend";
+import { sendWaitlistConfirmation } from "@/lib/gmail";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

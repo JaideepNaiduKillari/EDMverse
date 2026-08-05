@@ -35,7 +35,7 @@ Open http://localhost:3000.
 and email, then appends a row to a Google Sheet via `lib/googleSheets.ts`
 (deduping by email — it reads the existing Email column before appending).
 Each signup becomes one row: `Waitlist Number | Name | Country | Email | Created At`.
-After it is stored, the app sends a Resend confirmation email with the saved
+After it is stored, the app sends a Gmail confirmation email with the saved
 waitlist number.
 
 This works from a serverless deployment (Vercel, etc.) because it writes to
@@ -79,14 +79,13 @@ When deploying (e.g. to Vercel), add the same four variables in your
 hosting provider's environment variable settings — `.env.local` is never
 committed to git.
 
-### Resend email setup
+### Gmail email setup
 
-1. Create a Resend account and API key at https://resend.com/api-keys.
-2. In Resend, add and verify the domain you want to send from. Add the DNS
-   records Resend provides at your domain host.
+1. Turn on 2-Step Verification for the Gmail account that will send emails.
+2. Create a 16-character App Password at https://myaccount.google.com/apppasswords.
 3. Add these environment variables locally and to your deployed app:
-   - `RESEND_API_KEY`
-   - `RESEND_FROM_EMAIL`, for example `EDMVerse <waitlist@yourdomain.com>`.
+   - `GMAIL_USER`, for example `your-email@gmail.com`
+   - `GMAIL_APP_PASSWORD` (the App Password, not your normal Gmail password).
 
 The confirmation email is attempted only after the signup is saved. If email
 delivery is temporarily unavailable, the person remains on the waitlist and
