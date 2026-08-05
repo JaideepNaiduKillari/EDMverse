@@ -84,7 +84,7 @@ export default function Waitlist() {
               </h3>
               <p className="text-smoke-300 leading-relaxed">
                 {waitlistNumber
-                  ? `Your waitlist number is #${waitlistNumber}. Check your inbox for confirmation.`
+                  ? `Your waitlist number is #${waitlistNumber}.`
                   : "We&apos;ll email you as soon as EDMVerse opens up."}
               </p>
             </div>
