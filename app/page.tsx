@@ -4,6 +4,7 @@ import About from "@/components/About";
 import FeatureCards from "@/components/FeatureCards";
 import Waitlist from "@/components/Waitlist";
 import FAQ from "@/components/FAQ";
+import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <About />
         <Waitlist />
         <FAQ />
+        <Contact />
       </main>
     </>
   );

@@ -7,6 +7,7 @@ const NAV_LINKS: { label: string; id: string }[] = [
   { label: "Home", id: "hero" },
   { label: "About", id: "about" },
   { label: "FAQ", id: "faq" },
+  { label: "Contact", id: "contact" },
 ];
 
 export default function TopBar() {
